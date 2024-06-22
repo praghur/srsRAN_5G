@@ -131,6 +131,7 @@ request = pc.makeRequestRSpec()
 node = request.RawPC("node")
 node.hardware_type = params.nodetype
 node.disk_image = UBUNTU_IMG
+iface1 = node.addInterface("eth1")
 
 for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
     cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
@@ -143,10 +144,18 @@ node.addService(rspec.Execute(shell="bash", command=OPEN5GS_DEPLOY_SCRIPT))
 node2 = request.RawPC("node2")
 node2.hardware_type = params.nodetype
 node2.disk_image = UBUNTU_IMG
+iface2 = node2.addInterface("eth1")
 
 for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
     cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
     node2.addService(rspec.Execute(shell="bash", command=cmd))
+  
+# Add interfaces to each LAN link
+link1.addInterface(iface1)
+link1.addInterface(iface2)
+link1.link_multiplexing = True
+link1.vlan_tagging = True
+link1.best_effort = True
 
 tour = IG.Tour()
 tour.Description(IG.Tour.MARKDOWN, tourDescription)
