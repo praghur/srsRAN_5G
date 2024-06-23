@@ -131,11 +131,16 @@ node1 = request.RawPC("node1")
 node1.hardware_type = params.nodetype
 node1.disk_image = UBUNTU_IMG
 
+node2 = request.RawPC("node2")
+node2.hardware_type = params.nodetype
+node2.disk_image = UBUNTU_IMG
+
 for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
     cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
     node1.addService(rspec.Execute(shell="bash", command=cmd))
 
 node1.addService(rspec.Execute(shell="bash", command=OPEN5GS_DEPLOY_SCRIPT))
+node2.addService(rspec.Execute(shell="bash", command=SRS_DEPLOY_SCRIPT))
 
 tour = IG.Tour()
 tour.Description(IG.Tour.MARKDOWN, tourDescription)
