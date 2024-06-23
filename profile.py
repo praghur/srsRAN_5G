@@ -146,9 +146,9 @@ node1.addService(rspec.Execute(shell="bash", command=OPEN5GS_DEPLOY_SCRIPT))
 #node2.disk_image = UBUNTU_IMG
 #iface2 = node2.addInterface("eth1")
 
-for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
-    cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
-    node2.addService(rspec.Execute(shell="bash", command=cmd))
+#for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
+#    cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
+ #   node2.addService(rspec.Execute(shell="bash", command=cmd))
 
 # Create two separate LAN links
 #link1 = request.LAN("lan1")
