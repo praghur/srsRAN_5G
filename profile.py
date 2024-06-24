@@ -130,10 +130,23 @@ request = pc.makeRequestRSpec()
 node1 = request.RawPC("node1")
 node1.hardware_type = params.nodetype
 node1.disk_image = UBUNTU_IMG
+iface1 = node1.addInterface("eth1")
 
 node2 = request.RawPC("node2")
 node2.hardware_type = params.nodetype
 node2.disk_image = UBUNTU_IMG
+iface2 = node2.addInterface("eth1")
+
+# Create two separate LAN links
+link1 = request.LAN("lan1")
+
+# Add interfaces to each LAN link
+link1.addInterface(iface1)
+link1.addInterface(iface2)
+
+link1.link_multiplexing = True
+link1.vlan_tagging = True
+link1.best_effort = True
 
 for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
     cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
