@@ -151,6 +151,8 @@ link1.best_effort = True
 for srs_type, type_hash in DEFAULT_SRS_HASHES.items():
     cmd = "{} '{}' {}".format(SRS_DEPLOY_SCRIPT, type_hash, srs_type)
     node1.addService(rspec.Execute(shell="bash", command=cmd))
+    node2.addService(rspec.Execute(shell="bash", command=cmd))
+
 
 node1.addService(rspec.Execute(shell="bash", command=OPEN5GS_DEPLOY_SCRIPT))
 #node2.addService(rspec.Execute(shell="bash", command=OPEN5GS_DEPLOY_SCRIPT))
