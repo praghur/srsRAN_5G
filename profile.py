@@ -131,11 +131,13 @@ node1 = request.RawPC("node1")
 node1.hardware_type = params.nodetype
 node1.disk_image = UBUNTU_IMG
 iface1 = node1.addInterface("eth1")
+iface1.addAddress(rspec.IPv4Address("192.168.0.11", "255.255.255.0"))
 
 node2 = request.RawPC("node2")
 node2.hardware_type = params.nodetype
 node2.disk_image = UBUNTU_IMG
 iface2 = node2.addInterface("eth1")
+iface2.addAddress(rspec.IPv4Address("192.168.0.12", "255.255.255.0"))
 
 # Create two separate LAN links
 link1 = request.LAN("lan1")
