@@ -20,7 +20,7 @@ amf:
   ngap:
     server:
       - address: 127.0.0.2
-      #- address: 127.0.0.5
+      - address: 127.0.0.5
 
   metrics:
     server:
