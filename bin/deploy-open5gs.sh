@@ -4,6 +4,9 @@ BINDIR=`dirname $0`
 source $BINDIR/common.sh
 
 sudo sysctl -w net.ipv4.ip_forward=1
+ip tuntap add name ogstun mode tun
+ip addr add 10.45.0.1/16 dev ogstun
+ip link set ogstun up
 sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
 
 if [ -f $SRCDIR/open5gs-setup-complete ]; then
